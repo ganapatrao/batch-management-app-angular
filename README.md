@@ -1,5 +1,28 @@
 # BatchManagement
 
+
+npm install if it doesnt work u can try 
+delete package-lock json and try
+npm cache clean --force
+npm install --legacy-peer-deps
+
+go to npm --search bootstrap
+npm i bootstrap
+in angular.json
+   "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ]
+ng serve 
+ng serve --port 5000
+
+ provideHttpClient() in app.config.ts inorder to  use httpclient 
+
+or in anggular.json  server --development-> "port":4500
+
+cors error so we might require to run on specific project
+
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.10.
 
 ## Development server

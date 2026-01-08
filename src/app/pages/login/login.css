@@ -1,0 +1,48 @@
+.login-wrapper {
+  background-color: #f4f7f9; 
+  background-image: radial-gradient(#d1d9e0 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+.brand-icon {
+  letter-spacing: -2px;
+  color: #000;
+}
+
+.custom-input {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+
+  &:focus {
+    background-color: #fff;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.08);
+  }
+}
+
+.btn-dark {
+  border-radius: 0.75rem;
+  background-color: #121212;
+}
+
+.btn-outline-secondary {
+  border-radius: 0.75rem;
+  border-color: #e9ecef;
+  color: #444;
+  
+  &:hover {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    color: #000;
+  }
+}
