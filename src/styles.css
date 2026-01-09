@@ -2,3 +2,52 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Base skeleton */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: #e5e7eb;
+  border-radius: 6px;
+}
+
+/* Shimmer effect */
+.skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150px;
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Size helpers */
+.skeleton-text {
+  height: 14px;
+  width: 100%;
+}
+
+.skeleton-badge {
+  height: 20px;
+  width: 60px;
+}
+
+.skeleton-btn {
+  height: 28px;
+  width: 40px;
+}

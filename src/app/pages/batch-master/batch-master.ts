@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment.development';
 import { BatchService } from '../../core/services/batch.service';
 import { IAPIResponse } from '../../core/model/interfaces/common.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoaderService } from '../../core/services/loader-service';
 
 @Component({
   selector: 'app-batch-master',
@@ -19,6 +20,8 @@ export class BatchMaster implements OnInit {
   http = inject(HttpClient);
   batchService = inject(BatchService);
   snackBar = inject(MatSnackBar);
+
+    public loader = inject(LoaderService);
 
   batchObj: batchModel = new batchModel();
   batchRecords: batchModel[] = [];
@@ -83,7 +86,7 @@ export class BatchMaster implements OnInit {
     this.batchObj.startDate = this.formatDateForInput(editData.startDate);
     this.batchObj.endDate = this.formatDateForInput(editData.endDate);
 
-    this.Savebatch();
+    //this.Savebatch();
   }
 
   private formatDateForInput(value: string | Date): string {

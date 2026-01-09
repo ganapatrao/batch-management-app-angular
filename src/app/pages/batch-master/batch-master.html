@@ -1,5 +1,7 @@
+
 <div class="container-fluid min-vh-100 bg-light">
   <div class="row g-0">
+    
 
     <!-- LEFT PANEL -->
     <aside class="col-md-4 col-lg-3 bg-white border-end shadow-sm">
@@ -114,12 +116,15 @@
       <!-- CONTENT -->
       <div class="p-4">
 
+    
+ 
         <!-- TABLE -->
         <div class="card border-0 shadow-sm">
           <div class="card-header bg-white fw-semibold">
             <i class="bi bi-list-ul me-2"></i>
             Batches
           </div>
+
 
           <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
@@ -135,7 +140,34 @@
               </thead>
 
               <tbody>
+ @if (loader.loading()) {
 
+    
+  @for (_ of [1,2,3,4,5]; track $index) {
+    <tr>
+      <td><div class="skeleton skeleton-text"></div></td>
+      <td><div class="skeleton skeleton-text"></div></td>
+      <td><div class="skeleton skeleton-text"></div></td>
+      <td><div class="skeleton skeleton-badge"></div></td>
+      <td><div class="skeleton skeleton-btn"></div></td>
+    </tr>
+  }
+ }
+    <!-- LOADER ROW -->
+    <!-- <tr>
+      <td colspan="5" class="text-center py-4">
+        <div class="spinner-border text-primary" role="status"></div>
+      </td>
+    </tr> -->
+
+    <!-- SKELETON OPTION -->
+
+
+
+
+
+
+   @else {
                 @for (item of batchRecords; track $index) {
                      <tr>
                   <!-- <td><span class="badge bg-secondary">101</span></td> -->
@@ -159,12 +191,12 @@
                 }
                
 
-               
+            }    
 
               </tbody>
             </table>
-          </div>
-        </div>
+          </div>          
+        </div>  
 
       </div>
     </main>
