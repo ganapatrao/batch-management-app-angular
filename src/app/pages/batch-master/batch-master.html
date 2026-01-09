@@ -1,1 +1,173 @@
-<p>batch-master works!</p>
+<div class="container-fluid min-vh-100 bg-light">
+  <div class="row g-0">
+
+    <!-- LEFT PANEL -->
+    <aside class="col-md-4 col-lg-3 bg-white border-end shadow-sm">
+      <div class="p-4">
+
+        <!-- SEARCH PANEL (DEFAULT) -->
+        <div class="collapse show" id="searchPanel">
+
+          <h6 class="fw-bold text-primary mb-3">
+            <i class="bi bi-search me-2"></i>
+            Search Batches
+          </h6>
+
+          <div class="mb-3">
+            <label class="form-label small text-muted">Batch Name</label>
+            <input class="form-control" placeholder="Search by name">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small text-muted">Status</label>
+            <select class="form-select">
+              <option>All</option>
+              <option>Active</option>
+              <option>Inactive</option>
+            </select>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-outline-primary">
+              <i class="bi bi-search me-2"></i>
+              Search
+            </button>
+
+            <button class="btn btn-primary"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#searchPanel, #createPanel">
+              <i class="bi bi-plus-circle me-2"></i>
+              Create Batch
+            </button>
+          </div>
+
+        </div>
+
+        <!-- CREATE FORM PANEL -->
+        <div class="collapse" id="createPanel">
+
+          <h6 class="fw-bold text-primary mb-3">
+            <i class="bi bi-plus-circle me-2"></i>
+            Create Batch
+          </h6>
+
+          <form>
+
+            <div class="mb-3">
+              <label class="form-label">Batch Name *</label>
+              <input class="form-control" placeholder="Enter batch name" [(ngModel)]="batchObj.batchName" name="batchName">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" checked [(ngModel)]="batchObj.isActive" name="isActive">
+                <label class="form-check-label">Active</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Start Date *</label>
+              <input type="date" class="form-control"  [(ngModel)]="batchObj.startDate" name="startDate">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">End Date</label>
+              <input type="date" class="form-control"  [(ngModel)]="batchObj.endDate" name="endDate">
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" rows="3"  [(ngModel)]="batchObj.description"  name="description"></textarea>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary" (click)="Savebatch()">
+                <i class="bi bi-check-circle me-2"></i>
+                Save Batch
+              </button>
+
+              <button class="btn btn-light"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#createPanel, #searchPanel">
+                Cancel
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- RIGHT CONTENT -->
+    <main class="col-md-8 col-lg-9">
+
+      <!-- BLUE HEADER -->
+      <div class="p-4 text-white bg-primary bg-gradient">
+        <h2 class="fw-bold mb-1">Batch Management</h2>
+        <p class="mb-0 opacity-75">
+          View and manage training batches
+        </p>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="p-4">
+
+        <!-- TABLE -->
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-white fw-semibold">
+            <i class="bi bi-list-ul me-2"></i>
+            Batches
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light small text-uppercase text-muted">
+                <tr>
+                  <!-- <th>ID</th> -->
+                  <th>Batch Name</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Status</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                @for (item of batchRecords; track $index) {
+                     <tr>
+                  <!-- <td><span class="badge bg-secondary">101</span></td> -->
+                  <td class="fw-semibold">{{item.batchName}}</td>
+                  <td>{{item.startDate |date:'dd-MM-yy'}}</td>
+                  <td>{{item.endDate|date:'dd-MM-yy'}}</td>
+                  <td><span class="badge bg-success">{{item.isActive?"Active":"Done"}}</span></td>
+                  <td class="text-center">
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" data-bs-toggle="collapse"
+                    data-bs-target="#searchPanel, #createPanel"(click)="EditBatch(item)" >
+                        <i class="bi bi-pencil">Edit</i>
+                      </button>
+                      <button class="btn btn-outline-danger" (click)="deleteBatch(item.batchId)">
+                        <i class="bi bi-trash">Delete</i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                }
+               
+
+               
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+</div>

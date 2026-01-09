@@ -25,21 +25,16 @@
 
       <!-- Left menu -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+   
         <li class="nav-item">
-          <a class="nav-link active" href="#">
-            <i class="bi bi-house-door me-1"></i> Home
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             <i class="bi bi-grid me-1"></i> Dashboard
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="bi bi-folder me-1"></i> Projects
+          <a class="nav-link" routerLink="/batch" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="bi bi-folder me-1"></i> Batches
           </a>
         </li>
 
