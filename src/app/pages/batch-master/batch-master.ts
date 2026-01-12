@@ -3,7 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { batchModel } from '../../core/model/classes/Btach.model';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ApiMethodes } from '../../core/constant/Global.constant';
+import { ApiMethods } from '../../core/constant/Global.constant';
 import { environment } from '../../../environments/environment.development';
 import { BatchService } from '../../core/services/batch.service';
 import { IAPIResponse } from '../../core/model/interfaces/common.interface';

@@ -1,0 +1,314 @@
+<div class="container-fluid min-vh-100 bg-light">
+  <div class="row g-0">
+    <!-- LEFT PANEL -->
+    <aside class="col-md-4 col-lg-3 bg-white border-end shadow-sm">
+      <div class="p-4">
+        <!-- SEARCH PANEL (DEFAULT) -->
+        <div class="collapse show" id="searchPanel">
+          <h6 class="fw-bold text-primary mb-3">
+            <i class="bi bi-search me-2"></i>
+            Search Candidates
+          </h6>
+
+          <div class="mb-3">
+            <label class="form-label small text-muted">Full Name</label>
+            <input class="form-control" placeholder="Search by name" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small text-muted">Email</label>
+            <input type="email" class="form-control" placeholder="Search by email" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small text-muted">Role</label>
+            <select class="form-select">
+              <option>All Roles</option>
+              <option>Full Stack Developer</option>
+              <option>UI/UX Designer</option>
+              <option>Project Manager</option>
+              <option>Data Analyst</option>
+              <option>DevOps Engineer</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small text-muted">Status</label>
+            <select class="form-select">
+              <option>All</option>
+              <option>Active</option>
+              <option>Inactive</option>
+            </select>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-outline-primary">
+              <i class="bi bi-search me-2"></i>
+              Search
+            </button>
+
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="collapse"
+              data-bs-target="#searchPanel, #createPanel"
+             
+           >
+              <i class="bi bi-plus-circle me-2"></i>
+              Create Candidate
+            </button>
+          </div>
+        </div>
+
+        <!-- CREATE FORM PANEL -->
+        <div class="collapse" id="createPanel">
+          <h6 class="fw-bold text-primary mb-3">
+            <i class="bi bi-plus-circle me-2"></i>
+            Create Candidate
+          </h6>
+
+          <form [formGroup]="candidateForm">
+            <div class="mb-3">
+              <label class="form-label">Full Name *</label>
+              <input class="form-control" placeholder="Enter full name" formControlName="fullName" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email *</label>
+              <input type="email" class="form-control" placeholder="Enter email address" formControlName="email" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Mobile Number</label>
+              <input type="tel" class="form-control" placeholder="Enter mobile number" formControlName="mobileNumber" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Role *</label>
+              <select class="form-select" formControlName="role">
+                <option selected disabled>Select a role</option>
+                <option>Candidate</option>
+                <option>Admin</option>
+                    </select>
+            </div>
+<i class="fa-solid fa-eye fa-2x text-danger"></i>
+<i class="fa-solid fa-eye-slash fa-2x text-success ms-3"></i>
+<div class="mb-3">
+  <label class="form-label">Password *</label>
+
+  <div class="input-group">
+    <input
+      [type]="showPassword()? 'text' : 'password'"
+      class="form-control"
+      placeholder="Enter password"
+      formControlName="password"
+    />
+
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="togglePassword()"
+      aria-label="Toggle password visibility">
+
+      <!-- <i
+        class="fa-solid"
+        [ngClass]="showPassword() ? 'fa-eye-slash' : 'fa-eye'">
+      </i> -->
+      @if (showPassword()) {
+  <i class="fa-solid fa-eye-slash"></i>
+} @else {
+  <i class="fa-solid fa-eye"></i>
+}
+
+
+
+    </button>
+  </div>
+</div>
+
+
+            <div class="mb-4">
+              <label class="form-label">Status</label>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="createActive" checked />
+                <label class="form-check-label" for="createActive">Active</label>
+              </div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-primary" (click)="saveCandidate()"
+               [disabled]="candidateForm.invalid">
+                <i class="bi bi-check-circle me-2"></i>
+                Save Candidate
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-light"
+                data-bs-toggle="collapse"
+                data-bs-target="#createPanel, #searchPanel"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT CONTENT -->
+    <main class="col-md-8 col-lg-9">
+      <!-- BLUE HEADER -->
+      <div class="p-4 text-white bg-primary bg-gradient">
+        <h2 class="fw-bold mb-1">Candidate Management</h2>
+        <p class="mb-0 opacity-75">View and manage your candidates</p>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="p-4">
+        <div class="card border-0 shadow-sm">
+          <!-- SINGLE CARD HEADER -->
+          <div
+            class="card-header bg-white fw-semibold d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <i class="bi bi-people-fill me-2"></i>
+              Candidates
+            </div>
+
+            <!-- VIEW TOGGLE -->
+            <div class="btn-group btn-group-sm">
+              <button
+                class="btn"
+                [class.btn-primary]="viewMode() === 'table'"
+                [class.btn-outline-primary]="viewMode() !== 'table'"
+                (click)="setTableView()"
+                title="Table view"
+              >
+                <i class="fa-solid fa-table">table</i>
+              </button>
+
+              <button
+                class="btn"
+                [class.btn-primary]="viewMode() === 'card'"
+                [class.btn-outline-primary]="viewMode() !== 'card'"
+                (click)="setCardView()"
+                title="Card view"
+              >
+                <i class="fa-solid fa-th-large">card</i>
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD BODY -->
+          <div class="card-body p-0">
+            @if (viewMode() === 'table') {
+
+            <!-- TABLE VIEW -->
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="table-light small text-uppercase text-muted">
+                  <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th class="text-center">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <!-- your existing rows OR @for loop -->
+             @for (record of candidateRecords; track record.candidateId) {
+                <tr>
+                    <td>{{ record.fullName }}</td>
+                    <td>{{ record.email }}</td>
+                    <td>{{ record.mobileNumber }}</td>
+                    <td>{{ record.role }}</td>
+                    <td>{{ record.isActive ? 'Active' : 'Inactive' }}</td>
+                    <td class="text-center">
+                      <button
+                        class="btn btn-outline-primary btn-sm"
+                                 class="btn btn-primary"
+              data-bs-toggle="collapse"
+              data-bs-target="#searchPanel, #createPanel"
+                        (click)="editCandidate(record)"
+                      >
+                        <i class="bi bi-pencil">edit</i>
+                      </button>
+
+                      <button
+                        class="btn btn-outline-danger btn-sm"
+                        (click)="deleteCandidate(record.candidateId)"
+                      >
+                        <i class="bi bi-trash">delete</i>
+                      </button>
+                    </td>
+                </tr>
+
+                   }
+                </tbody>
+              </table>
+            </div>
+
+            } @else {
+
+            <!-- CARD VIEW -->
+            <div class="row g-3 p-3">
+              @for (candidate of candidateRecords; track $index) {
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 candidate-card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                      <div class="avatar">
+                        {{ candidate.fullName[0] }}{{ candidate.fullName.split(' ')[1]?.[0] }}
+                      </div>
+
+                      <div>
+                        <div class="fw-semibold">{{ candidate.fullName }}</div>
+                        <div class="small text-muted">{{ candidate.email }}</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-2">
+                      <span class="badge bg-info text-dark">{{ candidate.role }}</span>
+                    </div>
+
+                    <div class="mb-3">
+                      <span
+                        class="badge"
+                        [class.bg-success]="candidate.isActive"
+                        [class.bg-secondary]="!candidate.isActive"
+                      >
+                        {{ candidate.isActive ? 'Active' : 'Inactive' }}
+                      </span>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                      <button
+                        class="btn btn-outline-primary btn-sm"
+                        (click)="editCandidate(candidate)"
+                      >
+                        <i class="bi bi-pencil">edit</i>
+                      </button>
+
+                      <button
+                        class="btn btn-outline-danger btn-sm"
+                        (click)="deleteCandidate(candidate.candidateId)"
+                      >
+                        <i class="bi bi-trash">delete</i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              }
+            </div>
+
+            }
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

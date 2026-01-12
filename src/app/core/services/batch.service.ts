@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { ApiMethodes } from '../constant/Global.constant';
+import { ApiMethods } from '../constant/Global.constant';
 import { batchModel } from '../model/classes/Btach.model';
 import { IAPIResponse } from '../model/interfaces/common.interface';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
@@ -14,21 +14,21 @@ export class BatchService {
   http = inject(HttpClient);
 
   createNewBatch(batchObj: batchModel): Observable<IAPIResponse> {
-    return this.http.post<IAPIResponse>(environment.API_URL + '/' + ApiMethodes.BATCH, batchObj);
+    return this.http.post<IAPIResponse>(environment.API_URL + '/' + ApiMethods.BATCH, batchObj);
   }
 
 
   Updatebatch(batchObj:batchModel):Observable<IAPIResponse>{
-    return this.http.put<IAPIResponse>(`${environment.API_URL}/${ApiMethodes.BATCH}/${batchObj.batchId}`,batchObj)
+    return this.http.put<IAPIResponse>(`${environment.API_URL}/${ApiMethods.BATCH}/${batchObj.batchId}`,batchObj)
   }
 
   getBatches(): Observable<IAPIResponse> {
-    return this.http.get<IAPIResponse>(environment.API_URL + '/' + ApiMethodes.BATCH);
+    return this.http.get<IAPIResponse>(environment.API_URL + '/' + ApiMethods.BATCH);
   }
 
 
   deleteBatch(id:number):Observable<IAPIResponse>{
-    return  this.http.delete<IAPIResponse>(`${environment.API_URL}/${ApiMethodes.BATCH}/${id}`)
+    return  this.http.delete<IAPIResponse>(`${environment.API_URL}/${ApiMethods.BATCH}/${id}`)
   }
 
   

@@ -3,6 +3,7 @@ import { Layout } from './pages/layout/layout';
 import { BatchMaster } from './pages/batch-master/batch-master';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { authGuard } from './core/guard/auth-guard';
+import { Candidate } from './pages/candidate/candidate';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,10 @@ export const routes: Routes = [
         component: Dashboard,
         canActivate:[authGuard]
       },
+      {
+        path:'candidate',
+        component:Candidate
+      }
     ],
   },
   {
